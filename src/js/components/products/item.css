@@ -48,3 +48,22 @@
 .addBasket {
   margin-right: 10px;
 }
+
+.itemTransition-enter {
+  opacity: 0.01;
+  transition: opacity .5s ease-out;
+}
+
+.itemTransition-enter.itemTransition-enter-active {
+  opacity: 1;
+}
+
+.itemTransition-leave {
+  opacity: 0.02;
+  transition: opacity 0s 0s;
+}
+
+.itemTransition-leave.itemTransition-leave-active {
+  opacity: 0.01;
+  transition: opacity 0s 0s;
+}
