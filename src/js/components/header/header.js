@@ -17,7 +17,7 @@ var Header =
           </header>
           <div className="fixed-container">
             <div className="container">
-              <Basket className="pure-g" />
+              <Basket className="pure-g" {...this.props} />
             </div>
           </div>
           </div>

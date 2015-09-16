@@ -28,7 +28,7 @@ let Page = React.createClass({
           <div className='container'>
               <div className={pages['page'+pageName].pageClasses}>
                 <h1>{pages['page'+pageName].heading}</h1>
-                <Items type={pageName} />
+                <Items type={pageName} {...this.props} />
               </div>
           </div>
           );

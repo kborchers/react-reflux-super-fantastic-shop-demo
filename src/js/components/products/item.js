@@ -4,6 +4,9 @@ require('./item.css');
 
 let React = require('react');
 let Reflux = require('reflux');
+let Globalize = require('globalize');
+let FormatCurrency = require('react-globalize').FormatCurrency;
+let FormatNumber = require('react-globalize').FormatNumber;
 
 let basketStore = require('../../stores/basket-store');
 let actions = require('../../actions/app-actions');
@@ -66,8 +69,8 @@ let Item = React.createClass({
           <h4 className="appItem-title truncate">{this.props.item.name}</h4>
 
           <img className={'img-responsive appItem-img'} src={this.props.item.image} alt="" />
-          <div className="appItem-price">£ {this.props.item.price}.00</div>
-          <div className="appItem-qty">x { this.props.item.qty }</div>
+          <div className="appItem-price"><FormatCurrency locale={this.props.locale} currency={this.props.currency}>{this.props.item.price}</FormatCurrency></div>
+          <div className="appItem-qty">x <FormatNumber locale={this.props.locale}>{this.props.item.qty || 0}</FormatNumber></div>
           <div className="basketControls">
             {this.getBasketControls()}
           </div>

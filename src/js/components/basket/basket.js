@@ -3,6 +3,9 @@
 
 let React = require('react');
 let Reflux = require('reflux');
+let Globalize = require('globalize');
+let FormatCurrency = require('react-globalize').FormatCurrency;
+let FormatNumber = require('react-globalize').FormatNumber;
 
 let basketStore = require('../../stores/basket-store');
 let actions = require('../../actions/app-actions');
@@ -28,7 +31,7 @@ let Basket = React.createClass({
     this.setState(this.getBasketTotals());
   },
 
-  componentDidMount() {
+  componentWillMount() {
     this.setState(this.getBasketTotals());
     this.listenTo(actions.addItem, this.onBasketChange);
     this.listenTo(actions.removeItem, this.onBasketChange);
@@ -41,7 +44,7 @@ let Basket = React.createClass({
         <li key={n} className="pure-g">
           <div className="pure-u-1-2">
             <span className="appBasket-itemDetails">
-              {item.name} : £{item.price}.00
+              {item.name} : <FormatCurrency locale={this.props.locale} currency={this.props.currency}>{item.price}</FormatCurrency>
             </span>
             <span className="appBasket-qty">x {item.qty}</span>
             </div>
@@ -57,8 +60,8 @@ let Basket = React.createClass({
         <div className="pure-g">
           <div className="appBasket-label pure-u-1-2">Basket</div>
           <div className="pure-u-1-2">
-            <span className="appBasket-nrItems"> x {this.state.qty}</span>
-            <span className="appBasket-total">£{this.state.total}.00</span>
+            <span className="appBasket-nrItems"> x <FormatNumber locale={this.props.locale}>{this.state.qty}</FormatNumber></span>
+            <span className="appBasket-total"><FormatCurrency locale={this.props.locale} currency={this.props.currency}>{this.state.total}</FormatCurrency></span>
           </div>
         </div>
         <ul className="basketList list-reset">{list}</ul>
