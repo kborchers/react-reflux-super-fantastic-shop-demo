@@ -54,7 +54,7 @@ let routes = (
 );
 
 Router.run(routes, function (Handler, state) {
-  React.render(<Handler params={state} />, document.getElementById('app'));
+  React.render(<Handler {...state} />, document.getElementById('app'));
 });
 
 module.exports = App;

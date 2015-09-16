@@ -22,7 +22,7 @@ let pages = {
 
 let Page = React.createClass({
       render: function() {
-        let pageName = this.props.params.pathname.slice(1);
+        let pageName = this.props.pathname.slice(1);
         //console.log(pageName);
         return (
           <div className='container'>
