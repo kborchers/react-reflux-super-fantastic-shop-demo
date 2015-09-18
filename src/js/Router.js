@@ -34,12 +34,16 @@ let App = React.createClass({
     };
   },
 
+  updateState: function(newState) {
+    this.setState(newState);
+  },
+
   render: function () {
     let name = this.getRoutes().slice(0).reverse()[0].name;
 
     return (
       <div>
-      <Header {...this.state}>
+      <Header updateLocalization={this.updateState} {...this.state}>
         <nav className='appNav'>
             <ul className='appNav-list'>
               <li className='appNav-listItem'><Link className='appBtn' to='food' >Food</Link></li>
