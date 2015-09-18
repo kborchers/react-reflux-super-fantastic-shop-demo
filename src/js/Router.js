@@ -28,7 +28,7 @@ let App = React.createClass({
   mixins: [ Router.State ],
 
   getInitialState: function() {
-    return {
+    return JSON.parse(localStorage.getItem('localeState')) || {
       locale: "en",
       currency: "GBP"
     };
@@ -36,6 +36,7 @@ let App = React.createClass({
 
   updateState: function(newState) {
     this.setState(newState);
+    localStorage.setItem('localeState', JSON.stringify(newState));
   },
 
   render: function () {
