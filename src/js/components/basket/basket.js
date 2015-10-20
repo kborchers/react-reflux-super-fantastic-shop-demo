@@ -44,7 +44,7 @@ let Basket = React.createClass({
         <li key={n} className="pure-g">
           <div className="pure-u-1-2">
             <span className="appBasket-itemDetails">
-              {item.name} : <FormatCurrency locale={this.props.locale} currency={this.props.currency}>{item.price}</FormatCurrency>
+              {item.name} : <FormatCurrency locale={this.props.locale} currency={this.props.currency}>{item.price*this.props.rate}</FormatCurrency>
             </span>
             <span className="appBasket-qty">x {item.qty}</span>
             </div>
@@ -61,7 +61,7 @@ let Basket = React.createClass({
           <div className="appBasket-label pure-u-1-2">Basket</div>
           <div className="pure-u-1-2">
             <span className="appBasket-nrItems"> x <FormatNumber locale={this.props.locale}>{this.state.qty}</FormatNumber></span>
-            <span className="appBasket-total"><FormatCurrency locale={this.props.locale} currency={this.props.currency}>{this.state.total}</FormatCurrency></span>
+            <span className="appBasket-total"><FormatCurrency locale={this.props.locale} currency={this.props.currency}>{this.state.total*this.props.rate}</FormatCurrency></span>
           </div>
         </div>
         <ul className="basketList list-reset">{list}</ul>

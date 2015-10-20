@@ -28,7 +28,7 @@ let Items = React.createClass({
   render: function() {
     var items = this.state.products[this.props.type].map((item,i) => {
         item.type = this.state.productType;
-        return <Item key={item.id} item={item} index={i} locale={this.props.locale} currency={this.props.currency} />;
+        return <Item key={item.id} item={item} index={i} locale={this.props.locale} currency={this.props.currency} rate={this.props.rate} />;
       });
       return (
         <ReactCSSTransitionGroup component="ul" className="pure-g appItems list-reset" id="item-group"  transitionName="itemTransition" transitionLeave={false}>

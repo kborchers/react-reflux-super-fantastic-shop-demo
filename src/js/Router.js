@@ -24,14 +24,50 @@ let Header = require('./components/header/header');
 let Food = require('./components/page/page');
 let Fashion = require('./components/page/page');
 
+let $ = require('jquery');
+
 let App = React.createClass({
   mixins: [ Router.State ],
 
   getInitialState: function() {
-    return JSON.parse(localStorage.getItem('localeState')) || {
+    return {
       locale: "en",
-      currency: "GBP"
+      currency: "GBP",
+      rate: 1
     };
+  },
+
+  componentDidMount: function() {
+    let state = JSON.parse(localStorage.getItem('localeState')) || {
+      locale: "en",
+      currency: "GBP",
+      rate: 1
+    };
+
+    let rates = JSON.parse(localStorage.getItem('exchangeRates')) || {};
+
+    if (!rates.date) {
+      $.ajax({
+        dataType: 'json',
+        url: "http://api.fixer.io/latest?base=GBP",
+        success: function(data) {
+          localStorage.setItem('exchangeRates', JSON.stringify(data));
+
+          state.rate = data.rates[state.currency] || 1;
+        },
+        complete: function() {
+          if(this.isMounted()) {
+            this.updateState(state);
+          }
+        }.bind(this)
+      });
+    } else {
+      state.rate = rates.rates[state.currency] || 1;
+    }
+
+    if(this.isMounted()) {
+      this.updateState(state);
+    }
   },
 
   updateState: function(newState) {
@@ -44,7 +80,7 @@ let App = React.createClass({
 
     return (
       <div>
-      <Header updateLocalization={this.updateState} {...this.state}>
+      <Header updateLocalization={this.updateState} {...this.props} {...this.state}>
         <nav className='appNav'>
             <ul className='appNav-list'>
               <li className='appNav-listItem'><Link className='appBtn' to='food' >Food</Link></li>

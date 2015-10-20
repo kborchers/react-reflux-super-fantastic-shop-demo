@@ -69,7 +69,7 @@ let Item = React.createClass({
           <h4 className="appItem-title truncate">{this.props.item.name}</h4>
 
           <img className={'img-responsive appItem-img'} src={this.props.item.image} alt="" />
-          <div className="appItem-price"><FormatCurrency locale={this.props.locale} currency={this.props.currency}>{this.props.item.price}</FormatCurrency></div>
+          <div className="appItem-price"><FormatCurrency locale={this.props.locale} currency={this.props.currency}>{this.props.item.price*this.props.rate}</FormatCurrency></div>
           <div className="appItem-qty">x <FormatNumber locale={this.props.locale}>{this.props.item.qty || 0}</FormatNumber></div>
           <div className="basketControls">
             {this.getBasketControls()}

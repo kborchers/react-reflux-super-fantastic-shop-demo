@@ -4,9 +4,12 @@ let Basket = require('../basket/basket.js');
 
 let CurrencyMenu = React.createClass({
   updateCurrency: function(event) {
+    let rates = JSON.parse(localStorage.getItem('exchangeRates'));
+
     this.props.updateLocalization({
       locale: this.props.locale,
-      currency: event.target.value
+      currency: event.target.value,
+      rate: rates.rates[event.target.value] || 1
     });
   },
 
@@ -25,7 +28,8 @@ let LocaleMenu = React.createClass({
   updateLocale: function(event) {
     this.props.updateLocalization({
       locale: event.target.value,
-      currency: this.props.currency
+      currency: this.props.currency,
+      rate: this.props.rate
     });
   },
 
